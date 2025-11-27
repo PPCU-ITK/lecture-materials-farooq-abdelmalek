@@ -34,9 +34,10 @@ int main() {
 
     // --- TASK 2: Fix these two lines! ---
     
-    char initial = "B"; // ERROR! 'char' uses single quotes for one character.
-    std::string name = 'Bob'; // ERROR! 'std::string' uses double quotes.
-    
+    //char initial = "B"; // ERROR! 'char' uses single quotes for one character.
+    //std::string name = 'Bob'; // ERROR! 'std::string' uses double quotes.
+    char initial = 'B';          // char → SINGLE quotes, ONE character
+    std::string name = "Bob";    // string → DOUBLE quotes, MANY characters
     // ---
     
     std::cout << "Initial: " << initial << std::endl;

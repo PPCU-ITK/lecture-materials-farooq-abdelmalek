@@ -38,16 +38,17 @@ int main() {
     std::cout << "The value of PI is: " << PI << std::endl;
 
     // --- TASK 2: Fix this line ---
-    PI = 4.0; // Someone is trying to redefine math!
+    //PI = 4.0; // Someone is trying to redefine math!
     // ---
 
     std::cout << "PI is now... " << PI << std::endl;
 
     // --- TASK 3: Define your constants here ---
-    
+    const int MONTHS_IN_YEAR = 12;
+    const double SPEED_OF_LIGHT = 299792458.0;
     // --- TASK 4: Use your constants here ---
-    // int months = 5 * ...
-    // std::cout << "5 years is " << months << " months." << std::endl;
+    int months = 5 * MONTHS_IN_YEAR;
+    std::cout << "5 years is " << months << " months." << std::endl;
     
     std::cout << "---------------------------------------" << std::endl;
     return 0;
