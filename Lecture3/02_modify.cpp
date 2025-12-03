@@ -5,6 +5,7 @@
 // It should multiply the value AT that address by 3.
 void tripler(int* number_ptr) {
     // Your code here
+    *number_ptr = *number_ptr * 3;  // Dereference the pointer and multiply
     // Remember: *number_ptr gets you the value
 }
 
@@ -15,7 +16,8 @@ int main() {
 
     // TODO 2: Call the tripler function.
     // Hint: You cannot pass 'my_score' directly. You must pass its address!
-    
+    tripler(&my_score);
+
 
     std::cout << "Score after (should be 30): " << my_score << std::endl;
 

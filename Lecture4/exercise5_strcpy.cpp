@@ -14,25 +14,29 @@
  */
 void my_strcpy(char* destination, const char* source) {
     // 1. Write a 'while(true)' loop. We will
-    //    copy characters until we hit the '\0'
-    //    and then break.
-    //
+    //    copy characters until we hit the '\0'
+    //    and then break.
+
     // 2. Inside the loop:
-    //    a) Copy the character from *source to *destination.
-    //       (e.g., *destination = *source;)
-    //    b) Check if the character you just copied was
-    //       the null terminator ('\0').
-    //    c) If it was, 'break' from the loop.
-    //    d) If it was not, increment both 'destination'
-    //       and 'source' pointers.
+    //    a) Copy the character from *source to *destination.
+    //       (e.g., *destination = *source;)
+    //    b) Check if the character you just copied was
+    //       the null terminator ('\0').
+    //    c) If it was, 'break' from the loop.
+    //    d) If it was not, increment both 'destination'
+    //       and 'source' pointers.
 
     // TODO: Write your while-loop here.
-    // while (true) {
-    //    ...
-    //    ...
-    //    ...
-    //    ...
-    // }
+    while (true) {
+        *destination = *source; // 2a) Copy character
+
+        if (*source == '\0') {  // 2b, 2c) Check if the copied char was '\0'
+            break;              // If it was, the copy is complete, so break.
+        }
+
+        destination++;          // 2d) Move destination pointer forward
+        source++;               // 2d) Move source pointer forward
+    }
 }
 
 int main() {
@@ -48,11 +52,11 @@ int main() {
     // !! DANGER ZONE !!
     // Now we copy a long string into a tiny buffer.
     char buffer_overflow[10];
-    
+
     // This will compile, but it will write memory
     // past the end of 'buffer_overflow', corrupting
     // whatever is next on the stack!
-    
+
     std::cout << "--- Starting buffer overflow ---" << std::endl;
     my_strcpy(buffer_overflow, original_source);
     std::cout << "Overflowed copy: " << buffer_overflow << std::endl;

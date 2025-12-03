@@ -22,6 +22,7 @@ void leaky_function() {
 
     // TODO: Add the one line of code needed to fix this memory leak
     // before the function ends.
+    delete[] p; // FIX: Deallocate the array memory from the heap.
 
 
     std::cout << "leaky_function() ending..." << std::endl;

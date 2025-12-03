@@ -14,6 +14,10 @@ void swap_by_value(int a, int b) {
 // in the 'main' function.
 void swap_by_reference(int& a, int& b) {
     // Your code here
+    int temp = a;
+    a = b;
+    b = temp;
+    std::cout << "[In swap_by_reference] a=" << a << ", b=" << b << std::endl;
 }
 
 int main() {
@@ -30,7 +34,7 @@ int main() {
 
     std::cout << "\n--- Calling swap_by_reference ---" << std::endl;
     // TODO: Call swap_by_reference
-    // swap_by_reference(a, b);
+    swap_by_reference(a, b);
     std::cout << "--- After swap_by_reference ---" << std::endl;
     std::cout << "a: " << a << ", b: " << b << std::endl;
 

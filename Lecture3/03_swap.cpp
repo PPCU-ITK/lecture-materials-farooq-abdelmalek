@@ -6,7 +6,9 @@
 // (You will need a temporary integer variable inside the function).
 
 void swap_fruit(int* a, int* b) {
-    // Your code here
+    int temp = *a;   // Store the value pointed to by 'a' in a temporary variable
+    *a = *b;         // Assign the value pointed to by 'b' into the memory pointed to by 'a'
+    *b = temp;       // Assign the saved value (original *a) into the memory pointed to by 'b'
 }
 
 int main() {
@@ -16,7 +18,7 @@ int main() {
     std::cout << "Before Swap -> Apple: " << apple << ", Orange: " << orange << std::endl;
 
     // TODO 2: Call swap_fruit passing the addresses of apple and orange.
-    
+    swap_fruit(&apple, &orange);
 
     std::cout << "After Swap  -> Apple: " << apple << ", Orange: " << orange << std::endl;
 

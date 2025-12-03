@@ -8,41 +8,43 @@ struct Student {
 };
 
 /**
- * @brief Sets up the student database.
- * * THIS FUNCTION CONTAINS A CRITICAL FLAW.
- * It returns a pointer to memory on its own STACK.
+ * @brief Sets up the student database by creating a local vector
+ * and returning it by value (safe).
  */
-Student* setup_database() {
-    // 'student_db' is a LOCAL ARRAY. It lives on the STACK.
-    Student student_db[] = {
+std::vector<Student> setup_database() {
+    // 'student_db' is now a LOCAL std::vector.
+    // std::vector handles its own memory (on the heap) internally.
+    std::vector<Student> student_db = {
         {201, "David"},
         {202, "Eve"}
     };
     std::cout << "Inside setup_database():" << std::endl;
-    std::cout << "  'student_db' array is at address: " << &student_db << std::endl;
+    // We can't easily print the internal address, but the vector is valid.
 
-    // We return a pointer to the first element
-    return &student_db[0];
+    // The entire vector is returned. C++ efficiently handles this copy/move.
+    return student_db;
 
-} // 'student_db' is DESTROYED here. The stack memory is reclaimed.
+} // 'student_db' is destroyed here, but its data is MOVED/COPIED to the caller.
 
 int main() {
     std::cout << "Calling setup_database()..." << std::endl;
-    Student* p_db = setup_database();
+    
+    // The vector is returned by value and stored in 'db_handle'.
+    std::vector<Student> db_handle = setup_database();
     
     std::cout << "\nIn main():" << std::endl;
-    std::cout << "  p_db pointer holds address: " << p_db << std::endl;
 
-    // DANGER: We are dereferencing a DANGLING POINTER.
-    // The memory at p_db is no longer valid.
-    // This is Undefined Behavior!
-    std::cout << "  Accessing dangling pointer... " << std::endl;
-    std::cout << "  Found student: " << p_db->name << std::endl; // CRASH or GARBAGE
-
-    // TASK: 
-    // 1. Explain why this code is broken.
-    // 2. Fix it. The best fix is to change 'setup_database' to return
-    //    a 'std::vector<Student>' by value and update 'main' accordingly.
+    // We no longer use a pointer; we access the vector safely.
+    std::cout << "Accessing student data... " << std::endl;
     
+    // Access the first student's name from the valid, copied vector.
+    if (!db_handle.empty()) {
+        std::cout << "Found student: " << db_handle[0].name << std::endl; 
+    } else {
+        std::cout << "Database is empty." << std::endl;
+    }
+    
+    std::cout << "----------------------------------\n" << std::endl;
+
     return 0;
 }

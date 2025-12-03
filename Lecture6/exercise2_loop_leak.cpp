@@ -3,12 +3,12 @@
 /**
  * @brief Simulates creating a user profile by allocating
  * memory on the heap.
- * * THIS FUNCTION CONTAINS A MEMORY LEAK.
+ * * This function is now fixed and DOES NOT contain a memory leak.
  */
 void create_user_profile() {
     // Allocate 4KB of memory for a "profile"
     // (This is 1000 * 4 bytes/int = 4000 bytes)
-    int* profile_data = new int[1000];
+    int* profile_data = new int[1000]; // Allocation on the heap
 
     // Use the data
     profile_data[0] = 123;
@@ -19,18 +19,23 @@ void create_user_profile() {
     // The memory is leaked when this function returns.
 
     // TASK: Fix this leak. Add the correct 'delete[]' call.
+    delete[] profile_data; // FIX: Deallocate the array memory from the heap.
+    
+    // Optional: Set pointer to nullptr after deletion
+    // profile_data = nullptr; 
 }
 
 int main() {
-    std::cout << "Running memory leak simulation..." << std::endl;
+    std::cout << "Running memory leak simulation (FIXED)..." << std::endl;
+    std::cout << "The program's memory usage should now remain stable." << std::endl;
     std::cout << "Press Ctrl+C to stop." << std::endl;
-    std::cout << "Observe this program's memory usage in Task Manager or 'top'." << std::endl;
 
-    // This loop will run forever, leaking memory on each iteration.
+    // This loop will run forever, but the memory is freed on each iteration.
     for (long i = 1; ; ++i) {
         create_user_profile();
         if (i % 1000 == 0) {
-            std::cout << "Leaked " << i << " profiles..." << std::endl;
+            // Note: The output is less useful now, as no memory is actually leaking.
+            std::cout << "Processed " << i << " profiles without leaking." << std::endl;
         }
     }
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 
+// Define the structure for a Student
 struct Student {
     std::string name;
     int score;
@@ -15,7 +16,7 @@ void print_student(const Student& s) {
 
 /**
  * @brief Attempts to reset a student's score to 0.
- * THIS IS THE BROKEN FUNCTION.
+ * THIS IS THE BROKEN FUNCTION (Pass-by-Value).
  */
 void reset_score_by_value(Student s) { // s is a COPY
     std::cout << "  Inside by_value: Resetting " << s.name << "'s score..." << std::endl;
@@ -27,13 +28,16 @@ void reset_score_by_value(Student s) { // s is a COPY
  * TASK: Implement this function.
  * @brief Resets a student's score to 0 using a pointer.
  */
-// void reset_score_by_pointer(Student* p_student) {
-//     // HINT: Use the -> (arrow) operator to access
-//     // members of a struct via a pointer.
-//     std::cout << "  Inside by_pointer: Resetting " 
-//               << ... << "'s score..." << std::endl;
-//     ...
-// }
+void reset_score_by_pointer(Student* p_student) {
+    // The '->' (arrow) operator is shorthand for (*p_student).name
+    std::cout << "  Inside by_pointer: Resetting " 
+              << p_student->name << "'s score..." << std::endl; 
+    
+    // Access the score member using the arrow operator and set it to 0.
+    p_student->score = 0;
+
+    std::cout << "  Inside by_pointer: Score is now " << p_student->score << std::endl;
+}
 
 int main() {
     Student student_a = {"Alice", 85};
@@ -45,7 +49,7 @@ int main() {
     reset_score_by_value(student_a);
     
     std::cout << "After call:" << std::endl;
-    print_student(student_a); // Notice the score is still 85!
+    print_student(student_a); // Notice the score is still 85! (The original was not changed)
     std::cout << "-------------------------------\n" << std::endl;
 
 
@@ -54,11 +58,11 @@ int main() {
     print_student(student_a);
 
     // TASK: Call your 'reset_score_by_pointer' function here.
-    // HINT: You must pass the *address* of student_a.
-    // reset_score_by_pointer(...);
+    // HINT: You must pass the *address* of student_a using the address-of operator (&).
+    reset_score_by_pointer(&student_a); // Pass the address of student_a
     
     std::cout << "After call:" << std::endl;
-    print_student(student_a); // This should now show 0!
+    print_student(student_a); // This should now show 0! (The original HAS been changed)
     std::cout << "-------------------------------\n" << std::endl;
 
     return 0;

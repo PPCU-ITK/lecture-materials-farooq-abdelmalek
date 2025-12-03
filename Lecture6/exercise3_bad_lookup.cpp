@@ -42,9 +42,12 @@ int main() {
     
     Student* p_student = find_student_by_id(999);
     
-    // TASK: This line will crash the program.
-    // Explain why, and then add a check to prevent the crash.
-    std::cout << "Found: " << p_student->name << std::endl;
+    // TASK: This is the fix to prevent the crash.
+    if (p_student != nullptr) { // Check if the pointer is NOT null
+        std::cout << "Found: " << p_student->name << std::endl;
+    } else {
+        std::cout << "Error: Student not found (ID 999)." << std::endl;
+    }
     
     
     std::cout << "----------------------------------\n" << std::endl;

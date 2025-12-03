@@ -24,20 +24,22 @@ int main() {
         std::cout << "Allocating memory...\n";
         
         // TODO: Replace the following two lines with std::unique_ptr
-        IntegerWrapper* raw_ptr = new IntegerWrapper(42);
+        
+        std::unique_ptr<IntegerWrapper> smart_ptr(new IntegerWrapper(42));
         
         // This simulates a function that might fail
         risky_operation();
 
-        std::cout << "Using value: " << raw_ptr->get() << "\n";
+        std::cout << "Using value: " << smart_ptr->get() << "\n";
 
         // TODO: If you use unique_ptr, you won't need this explicit delete
-        delete raw_ptr; 
+        // delete raw_ptr; 
         std::cout << "Memory successfully freed.\n";
 
     } catch (const std::exception& e) {
         std::cout << "Caught exception: " << e.what() << "\n";
         std::cout << "Exiting main...\n";
+        // No need to manually free memory when using unique_ptr
     }
 
     // If successful, you should see "Destructed IntegerWrapper" printed above.

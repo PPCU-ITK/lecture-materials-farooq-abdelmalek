@@ -15,19 +15,19 @@ int my_strlen(const char* str) {
     int length = 0;
 
     // 2. Write a 'while' loop that continues as long
-    //    as the character being pointed to (*str)
-    //    is NOT the null character ('\0').
+    //    as the character being pointed to (*str)
+    //    is NOT the null character ('\0').
     //
     // 3. Inside the loop:
-    //    a) Increment your length counter.
-    //    b) Increment the pointer 'str' to move to
-    //       the next character.
+    //    a) Increment your length counter.
+    //    b) Increment the pointer 'str' to move to
+    //       the next character.
 
     // TODO: Write your while-loop here.
-    // while (*str != '\0') {
-    //    ...
-    //    ...
-    // }
+    while (*str != '\0') {
+        length++;
+        str++;
+    }
 
 
     // 4. Return the final length.
@@ -41,7 +41,7 @@ int main() {
     int len = my_strlen(greeting);
 
     std::cout << "The string is: " << greeting << std::endl;
-    std::cout << "My length is:  " << len << std::endl;
+    std::cout << "My length is:  " << len << std::endl;
     // Note: The standard library has 'strlen' in <cstring>
     // Let's see if we match!
     // #include <cstring>

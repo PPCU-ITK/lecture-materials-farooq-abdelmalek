@@ -1,24 +1,16 @@
 #include <iostream>
 
 int main() {
-    int power_level = 9000;
+    int power_level = 9000;     // A normal integer on the stack
     
-    // PART 1: The Crash
-    // This pointer is NOT initialized. It points to a random memory location.
-    // OR it might be nullptr (0x0), which is also invalid to write to.
-    int* ptr = nullptr; 
+    int* ptr = nullptr;         // A pointer that currently points to NO valid memory
 
-    // UNCOMMENT the lines below to see the crash, then FIX IT.
-    
-    /*
-    std::cout << "Attempting to write to address: " << ptr << std::endl;
-    *ptr = 9001; // <--- CRASH HAPPENS HERE (Segmentation Fault)
-    */
+    // Fix: Make the pointer reference an actual variable before dereferencing
+    ptr = &power_level;         // Point 'ptr' to the memory address of 'power_level'
 
-    // TODO: Fix the crash by ensuring 'ptr' points to 'power_level' 
-    // BEFORE we try to write to *ptr.
-    
-    
+    // Now it’s safe to write through the pointer
+    *ptr = 9001;                // Change the value stored at that address
+
     std::cout << "If you see this message, you fixed the crash!" << std::endl;
     std::cout << "Power Level is now: " << power_level << std::endl;
 
